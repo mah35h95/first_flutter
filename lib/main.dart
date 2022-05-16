@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'quote.dart';
+import 'quote_card.dart';
 
 void main() => runApp(MaterialApp(
       home: QuoteList(),
@@ -19,10 +20,6 @@ class _QuoteListState extends State<QuoteList> {
     Quote(text: 'Pain is progress', author: 'Mahesh'),
   ];
 
-  Widget quoteTemplate(quote) {
-    return QuoteCard(quote: quote);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,39 +30,15 @@ class _QuoteListState extends State<QuoteList> {
         backgroundColor: Colors.redAccent,
       ),
       body: Column(
-        children: quotes.map((quote) => quoteTemplate(quote)).toList(),
-      ),
-    );
-  }
-}
-
-class QuoteCard extends StatelessWidget {
-  
-  final Quote quote;
-  QuoteCard({required this.quote});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Text(
-              quote.text,
-              style: TextStyle(fontSize: 18, color: Colors.grey[600]),
-            ),
-            SizedBox(
-              height: 6,
-            ),
-            Text(
-              quote.author,
-              style: TextStyle(fontSize: 14, color: Colors.grey[800]),
-            )
-          ],
-        ),
+        children: quotes
+            .map((quote) => QuoteCard(
+                quote: quote,
+                delete: () {
+                  setState(() {
+                    quotes.remove(quote);
+                  });
+                }))
+            .toList(),
       ),
     );
   }
