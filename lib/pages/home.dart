@@ -13,6 +13,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     data = data.isNotEmpty ? data : ModalRoute.of(context)!.settings.arguments as Map;
+    // ignore: avoid_print
     print(data);
 
     //set backgroung
@@ -54,7 +55,7 @@ class _HomeState extends State<Home> {
                     style: TextStyle(color: Colors.grey[300]),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
@@ -62,7 +63,7 @@ class _HomeState extends State<Home> {
                   children: <Widget>[
                     Text(
                       data['location'],
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 28,
                         letterSpacing: 2,
                         color: Colors.white,
@@ -70,12 +71,12 @@ class _HomeState extends State<Home> {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Text(
                   data['time'],
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 66,
                     color: Colors.white,
                   ),

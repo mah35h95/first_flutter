@@ -24,6 +24,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
     WorldTime instance = locations[index];
     await instance.getTime();
     // navigate to home screen
+    // ignore: use_build_context_synchronously
     Navigator.pop(context, {
       'location': instance.location,
       'flag': instance.flag,
