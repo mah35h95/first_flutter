@@ -1,57 +1,13 @@
+import 'package:first_flutter/pages/choose_location.dart';
+import 'package:first_flutter/pages/home.dart';
+import 'package:first_flutter/pages/loading.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
-      home: Home(),
+  initialRoute: '/home',
+      routes: {
+        '/': (context) => const Loading(),
+        '/home':(context) => const Home(),
+        '/location':(context) => const ChooseLocation(),
+      },
     ));
-
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('My First App'),
-          centerTitle: true,
-          backgroundColor: Colors.red[600],
-        ),
-        body: Row(
-          
-          children: <Widget>[
-            Expanded(
-              flex: 3,
-              child: Image.asset('assets/imageSpace.jpg')
-              ),
-            Expanded(
-              flex: 1,
-              child: Container(
-               padding: EdgeInsets.all(30),
-               color: Colors.cyan,
-               child: Text('1'),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-               padding: EdgeInsets.all(30),
-               color: Colors.pinkAccent,
-               child: Text('2'),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-               padding: EdgeInsets.all(30),
-               color: Colors.amber,
-               child: Text('3'),
-              ),
-            ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => {},
-          child: Text('Click'),
-          backgroundColor: Colors.red[600],
-        ));
-  }
-}
