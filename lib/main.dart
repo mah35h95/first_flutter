@@ -1,57 +1,68 @@
 import 'package:flutter/material.dart';
+import 'quote.dart';
 
 void main() => runApp(MaterialApp(
-      home: Home(),
+      home: QuoteList(),
     ));
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class QuoteList extends StatefulWidget {
+  const QuoteList({Key? key}) : super(key: key);
+
+  @override
+  State<QuoteList> createState() => _QuoteListState();
+}
+
+class _QuoteListState extends State<QuoteList> {
+  List<Quote> quotes = [
+    Quote(text: 'Why are you here?', author: 'Mahesh'),
+    Quote(text: 'Hakunama thatha', author: 'Mahesh'),
+    Quote(text: 'Pain is progress', author: 'Mahesh'),
+  ];
+
+  Widget quoteTemplate(quote) {
+    return Card(
+      margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[Text(
+            quote.text,
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.grey[600]
+            ),
+            ),
+          SizedBox(
+            height: 6,
+          ),
+          Text(
+            quote.author,
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.grey[800]
+            ),
+          )
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('My First App'),
-          centerTitle: true,
-          backgroundColor: Colors.red[600],
-        ),
-        body: Row(
-          
-          children: <Widget>[
-            Expanded(
-              flex: 3,
-              child: Image.asset('assets/imageSpace.jpg')
-              ),
-            Expanded(
-              flex: 1,
-              child: Container(
-               padding: EdgeInsets.all(30),
-               color: Colors.cyan,
-               child: Text('1'),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-               padding: EdgeInsets.all(30),
-               color: Colors.pinkAccent,
-               child: Text('2'),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-               padding: EdgeInsets.all(30),
-               color: Colors.amber,
-               child: Text('3'),
-              ),
-            ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => {},
-          child: Text('Click'),
-          backgroundColor: Colors.red[600],
-        ));
+      backgroundColor: Colors.grey[200],
+      appBar: AppBar(
+        title: Text('Awesome Quotes'),
+        centerTitle: true,
+        backgroundColor: Colors.redAccent,
+      ),
+      body: Column(
+        children: quotes
+            .map((quote) => quoteTemplate(quote))
+            .toList(),
+      ),
+    );
   }
 }
